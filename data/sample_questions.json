@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "question": "Which planet is closest to the Sun?",
+    "answer": "Mercury",
+    "relevant": ["mercury"]
+  },
+  {
+    "id": "q2",
+    "question": "Which planet has the most prominent ring system?",
+    "answer": "Saturn",
+    "relevant": ["saturn"]
+  },
+  {
+    "id": "q3",
+    "question": "What is the largest planet in the Solar System?",
+    "answer": "Jupiter",
+    "relevant": ["jupiter"]
+  },
+  {
+    "id": "q4",
+    "question": "Which planet is known as the Red Planet?",
+    "answer": "Mars",
+    "relevant": ["mars"]
+  },
+  {
+    "id": "q5",
+    "question": "What is the largest moon of Saturn?",
+    "answer": "Titan",
+    "relevant": ["saturn"]
+  },
+  {
+    "id": "q6",
+    "question": "Which planet has the most confirmed moons?",
+    "answer": "Saturn",
+    "relevant": ["saturn"]
+  },
+  {
+    "id": "q7",
+    "question": "How long does sunlight take to reach Earth?",
+    "answer": "about 8 minutes",
+    "relevant": ["sun"]
+  },
+  {
+    "id": "q8",
+    "question": "What is the hottest planet in the Solar System?",
+    "answer": "Venus",
+    "relevant": ["venus"]
+  },
+  {
+    "id": "q9",
+    "question": "Which dwarf planet was reclassified from planet status in 2006?",
+    "answer": "Pluto",
+    "relevant": ["pluto"]
+  },
+  {
+    "id": "q10",
+    "question": "What is the name of the galaxy containing the Solar System?",
+    "answer": "Milky Way",
+    "relevant": ["milky-way"]
+  }
+]

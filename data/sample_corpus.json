@@ -1,0 +1,62 @@
+[
+  {
+    "id": "sun",
+    "title": "The Sun",
+    "text": "The Sun is a yellow dwarf star at the center of the Solar System. Sunlight takes about 8 minutes and 20 seconds to reach Earth. It contains about 99.86% of all the mass in the Solar System."
+  },
+  {
+    "id": "mercury",
+    "title": "Mercury",
+    "text": "Mercury is the smallest planet in the Solar System and the closest to the Sun. A year on Mercury lasts about 88 Earth days. It has almost no atmosphere, which causes enormous day-to-night temperature swings."
+  },
+  {
+    "id": "venus",
+    "title": "Venus",
+    "text": "Venus is the hottest planet, with surface temperatures around 465 degrees Celsius, even though it is the second planet from the Sun. Its thick atmosphere is mostly carbon dioxide. Venus spins backwards in a retrograde rotation, and a day on Venus lasts longer than its year."
+  },
+  {
+    "id": "earth",
+    "title": "Earth",
+    "text": "Earth is the only known planet that supports life. Liquid water oceans cover about 71% of its surface. Earth has one natural satellite, the Moon."
+  },
+  {
+    "id": "mars",
+    "title": "Mars",
+    "text": "Mars is often called the Red Planet because its surface is covered with iron oxide dust. Olympus Mons is the tallest volcano in the Solar System. Mars has two small moons, Phobos and Deimos, and a very thin atmosphere."
+  },
+  {
+    "id": "jupiter",
+    "title": "Jupiter",
+    "text": "Jupiter is the largest planet in the Solar System. The Great Red Spot is a giant storm that has raged for centuries. Jupiter is composed mostly of hydrogen and helium and has more than 90 known moons, including Ganymede, the largest moon in the Solar System."
+  },
+  {
+    "id": "saturn",
+    "title": "Saturn",
+    "text": "Saturn is famous for its prominent ring system, made of ice and rock particles. It is the least dense planet and would float in water if a large enough ocean existed. Titan, Saturn's largest moon, has a thick atmosphere. As of 2025, Saturn has more than 270 confirmed moons, the most of any planet."
+  },
+  {
+    "id": "uranus",
+    "title": "Uranus",
+    "text": "Uranus rotates nearly on its side, with an axial tilt of about 98 degrees. It has the coldest planetary atmosphere recorded in the Solar System. Methane in its upper atmosphere gives the planet a blue-green color. Uranus was discovered in 1781 by astronomer William Herschel."
+  },
+  {
+    "id": "neptune",
+    "title": "Neptune",
+    "text": "Neptune is the farthest planet from the Sun. It has the strongest winds in the Solar System, reaching more than 2,000 kilometers per hour. Neptune appears deep blue because of methane in its atmosphere. It was discovered in 1846 and has one large moon, Triton, which orbits backwards."
+  },
+  {
+    "id": "moon",
+    "title": "The Moon",
+    "text": "The Moon is Earth's only natural satellite. It orbits Earth at an average distance of about 384,400 kilometers. The Moon's gravity causes tides on Earth. The first humans landed on the Moon in 1969 during NASA's Apollo 11 mission."
+  },
+  {
+    "id": "pluto",
+    "title": "Pluto",
+    "text": "Pluto is a dwarf planet that was reclassified from full planet status by the International Astronomical Union in 2006. It is the largest known dwarf planet in the Kuiper Belt. Pluto has a heart-shaped glacier region called Tombaugh Regio. It has five known moons, the largest of which is Charon."
+  },
+  {
+    "id": "milky-way",
+    "title": "The Milky Way",
+    "text": "The Milky Way is the barred spiral galaxy that contains the Solar System. It is about 100,000 light-years across and contains hundreds of billions of stars. The Sun orbits the galactic center once every roughly 230 million years."
+  }
+]

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG Eval Harness</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="brand">RAG Eval Harness</span>
+      <span class="hint">Local keyword retrieval, no API keys</span>
+    </header>
+
+    <section class="hero">
+      <h1>How good is your RAG pipeline, really?</h1>
+      <p>Paste or use the sample corpus and question set, pick a retriever and top-k, then get recall, precision, MRR, answer F1 and latency per question.</p>
+    </section>
+
+    {% if error %}
+    <div class="error" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <form class="card" method="post" action="/evaluate">
+      <div class="sample-note">
+        <p>Sample data: {{ n_docs }} documents and {{ n_questions }} questions about the Solar System.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label class="field-label" for="corpus_source">Corpus</label>
+          <select class="select-input" id="corpus_source" name="corpus_source">
+            <option value="sample">Use sample corpus ({{ n_docs }} docs)</option>
+            <option value="paste">Paste my own JSON</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label" for="questions_source">Question set</label>
+          <select class="select-input" id="questions_source" name="questions_source">
+            <option value="sample">Use sample questions ({{ n_questions }} questions)</option>
+            <option value="paste">Paste my own JSON</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="corpus_text">Corpus JSON</label>
+        <textarea class="textarea-input" id="corpus_text" name="corpus_text" rows="5" placeholder="[{&quot;id&quot;: &quot;mercury&quot;, &quot;title&quot;: &quot;...&quot;, &quot;text&quot;: &quot;...&quot;}]"></textarea>
+        <p class="hint">Only used when &quot;Paste my own JSON&quot; is selected.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="questions_text">Question set JSON</label>
+        <textarea class="textarea-input" id="questions_text" name="questions_text" rows="5" placeholder="[{&quot;id&quot;: &quot;q1&quot;, &quot;question&quot;: &quot;...&quot;, &quot;answer&quot;: &quot;...&quot;, &quot;relevant&quot;: [&quot;mercury&quot;]}]"></textarea>
+        <p class="hint">Only used when &quot;Paste my own JSON&quot; is selected.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label class="field-label" for="method">Retriever</label>
+          <select class="select-input" id="method" name="method">
+            <option value="bm25">BM25 keyword ranking</option>
+            <option value="overlap">Term-overlap baseline</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label" for="top_k">Top-k retrieved docs</label>
+          <input class="number-input" type="number" id="top_k" name="top_k" value="3" min="1" max="10">
+        </div>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" name="compare" checked>
+        Compare against the other retriever at the same top-k
+      </label>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Run evaluation</button>
+        <a class="btn btn-ghost" href="/api/evaluate">JSON API</a>
+        <a class="btn btn-ghost" href="/export.csv">Download sample CSV</a>
+      </div>
+    </form>
+
+    <section class="card">
+      <span class="eyebrow">What it measures</span>
+      <ul>
+        <li>Recall@k: did the relevant document appear in the top-k results?</li>
+        <li>Precision@k: how many of the top-k documents are relevant?</li>
+        <li>MRR: mean reciprocal rank of the first relevant document.</li>
+        <li>Token-level answer F1 and exact-match rate against the ground-truth answer.</li>
+        <li>Latency per question measured on the local evaluator.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

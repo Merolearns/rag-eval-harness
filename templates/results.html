@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluation results — RAG Eval Harness</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="brand">RAG Eval Harness</span>
+      <a class="btn btn-ghost" href="/">New evaluation</a>
+    </header>
+
+    <h1 class="results-title">Evaluation results</h1>
+    <p class="hint">Retriever {{ method }} · top-k {{ top_k }} · {{ eval.n_docs }} documents · {{ eval.n_questions }} questions</p>
+
+    <section class="card">
+      <span class="eyebrow">Aggregate scores</span>
+      <div class="stats">
+        <div class="stat-chip"><strong>{{ "%.3f"|format(eval.result.aggregate.recall_at_k) }}</strong><span>Recall@k</span></div>
+        <div class="stat-chip"><strong>{{ "%.3f"|format(eval.result.aggregate.precision_at_k) }}</strong><span>Precision@k</span></div>
+        <div class="stat-chip"><strong>{{ "%.3f"|format(eval.result.aggregate.mrr) }}</strong><span>MRR</span></div>
+        <div class="stat-chip"><strong>{{ "%.3f"|format(eval.result.aggregate.mean_f1) }}</strong><span>Mean answer F1</span></div>
+        <div class="stat-chip"><strong>{{ "%.1f"|format(eval.result.aggregate.exact_match_rate * 100) }}%</strong><span>Exact match</span></div>
+        <div class="stat-chip"><strong>{{ "%.1f"|format(eval.result.aggregate.avg_latency_ms) }} ms</strong><span>Avg latency</span></div>
+      </div>
+    </section>
+
+    {% if eval.comparison %}
+    <section class="card">
+      <span class="eyebrow">Head-to-head comparison</span>
+      <table class="compare-table">
+        <thead>
+          <tr><th>Config</th><th>Recall@k</th><th>Precision@k</th><th>MRR</th><th>Mean F1</th><th>Exact match</th></tr>
+        </thead>
+        <tbody>
+          {% for run in eval.comparison %}
+          <tr>
+            <td>{{ run.config.method }} (k={{ run.config.top_k }})</td>
+            <td>{{ "%.3f"|format(run.aggregate.recall_at_k) }}</td>
+            <td>{{ "%.3f"|format(run.aggregate.precision_at_k) }}</td>
+            <td>{{ "%.3f"|format(run.aggregate.mrr) }}</td>
+            <td>{{ "%.3f"|format(run.aggregate.mean_f1) }}</td>
+            <td>{{ "%.1f"|format(run.aggregate.exact_match_rate * 100) }}%</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
+
+    <section class="card">
+      <span class="eyebrow">Answer F1 per question</span>
+      <div class="f1-chart">{{ f1_svg|safe }}</div>
+    </section>
+
+    <section class="card">
+      <span class="eyebrow">Per-question breakdown</span>
+      <table class="q-table">
+        <thead>
+          <tr><th>#</th><th>Question</th><th>Gold answer</th><th>Predicted answer</th><th>F1</th><th>Retrieved</th><th>Hit</th></tr>
+        </thead>
+        <tbody>
+          {% for q in eval.result.per_question %}
+          <tr>
+            <td>{{ q.id }}</td>
+            <td>{{ q.question }}</td>
+            <td><span class="gold-text">{{ q.gold_answer }}</span></td>
+            <td>{% if q.predicted_answer %}<span class="answer-text">{{ q.predicted_answer }}</span>{% else %}—{% endif %}</td>
+            <td>{{ "%.3f"|format(q.f1) }}</td>
+            <td>{% if q.retrieved_titles %}{{ q.retrieved_titles | join(", ") }}{% else %}—{% endif %}</td>
+            <td>{% if q.hit %}<span class="hit-badge">Hit</span>{% else %}<span class="miss-badge">Miss</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="hint">Hit = at least one relevant document was retrieved.</p>
+    </section>
+
+    <div class="form-actions">
+      <a class="btn btn-primary" href="/">Run another evaluation</a>
+      <a class="btn btn-ghost" href="/export.csv?top_k={{ top_k }}&method={{ method }}">Download CSV</a>
+    </div>
+  </div>
+</body>
+</html>
